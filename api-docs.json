@@ -1,0 +1,167 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Documentations",
+        "license": {
+            "name": "MIT"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/v1/user/authenticate": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "First Step for login or register",
+                "operationId": "loginRequest",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LoginRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "$ref": "#/components/schemas/LoginResource"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/RegisterResource"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/user/login/password": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "If user has password, password and mobile send from here  fo going to next step.",
+                "description": "Login with password",
+                "operationId": "loginWithPassword",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LoginWithPasswordRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "LoginRequest": {
+                "properties": {
+                    "mobile": {
+                        "description": "Get the validation rules that apply to the request.",
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "integer"
+                            }
+                        ]
+                    }
+                },
+                "type": "object",
+                "example": {
+                    "mobile": "09171111111"
+                }
+            },
+            "LoginWithPasswordRequest": {
+                "properties": {
+                    "mobile": {
+                        "description": "Get the validation rules that apply to the request.",
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "integer"
+                            }
+                        ]
+                    },
+                    "password": {}
+                },
+                "type": "object",
+                "example": {
+                    "mobile": "09171111111",
+                    "password": "password"
+                }
+            },
+            "LoginResource": {
+                "title": "Login as User",
+                "properties": {
+                    "has_account": {
+                        "description": "Transform the resource into an array.",
+                        "type": "boolean"
+                    },
+                    "has_password": {
+                        "type": "boolean"
+                    },
+                    "phone": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "LoginWithPasswordResource": {
+                "title": "Login as User",
+                "properties": {
+                    "phone": {
+                        "description": "Transform the resource into an array.",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "RegisterResource": {
+                "title": "Login as New User",
+                "properties": {
+                    "has_account": {
+                        "description": "Transform the resource into an array.",
+                        "type": "boolean"
+                    },
+                    "has_password": {
+                        "type": "boolean"
+                    },
+                    "phone": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}

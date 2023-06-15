@@ -1,0 +1,35 @@
+.pattern {
+    display: flex;
+    height: 4px;
+    justify-content: space-between;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 99999;
+}
+
+.pattern span{
+    display: block;
+    width: 100%;
+}
+
+.pattern .red{
+    background-color: #fc3c5f;
+}
+
+.pattern .indigo {
+    background-color: #993cfc;
+}
+
+.pattern .blue {
+    background-color: #3ca9fc;
+}
+
+.pattern .green {
+    background-color: #3cfc5f;
+}
+
+.pattern .yellow {
+    background-color: #fcdf3c;
+}
